@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crible — logo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f1ea;--ink:#16201d;--soft:#68706b;--line:#dcd7cb;--red:#d9472b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 "Bricolage Grotesque",sans-serif}
+main{max-width:1320px;margin:0 auto;padding:36px 16px 48px;display:grid;gap:16px;grid-template-columns:1.3fr 1fr}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;place-items:center;position:relative;min-height:260px}
+.tile.dark{background:#121816;border-color:#121816}
+.label{position:absolute;left:18px;top:14px;font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;color:var(--soft)}
+.dark .label{color:#7d8681}
+.wide{grid-column:1/-1}
+.sizes{display:flex;align-items:flex-end;gap:34px}
+.sizes figure{margin:0;display:grid;justify-items:center;gap:10px;font:500 11px "IBM Plex Mono",monospace;color:var(--soft)}
+.browser{width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.tabs{background:#e9e5dc;padding:8px 10px 0;display:flex;gap:6px}
+.tab{display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px 8px 0 0;padding:8px 14px;font:500 13px "IBM Plex Sans",system-ui,sans-serif;color:#2c3431}
+.tab.off{background:transparent;color:#7a817d}
+.urlbar{padding:9px 14px;border-bottom:1px solid var(--line);font:400 12px "IBM Plex Mono",monospace;color:#7a817d}
+.app{display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.app nav{display:flex;gap:18px;margin-left:auto;font:500 13px "Bricolage Grotesque";color:#5b625e}
+.body{padding:18px;display:grid;gap:8px}
+.bar{height:10px;border-radius:5px;background:#eceae3}
+.report{width:100%;max-width:420px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(0,0,0,.35);padding:26px 28px}
+.report h3{margin:16px 0 4px;font:700 20px/1.2 "Bricolage Grotesque"}
+.report p{margin:0;color:var(--soft);font-size:13px}
+.kv{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font:400 12px "IBM Plex Mono",monospace;color:#3e4542}
+.kv b{color:var(--red);font-weight:600}
+</style>
+</head>
+<body>
+<main id="m"></main>
+<script>
+const INK = "#16201d", RED = "#d9472b", LIGHT = "#f4f1ea", RED_D = "#ff7752";
+function iLoupe(ink, red, size) {
+  const stem = size * 0.112, xh = size * 0.52, r = size * 0.145, ring = size * 0.052;
+  const cy = -xh - r * 1.12;
+  return `<g transform="rotate(-11 ${stem / 2} 0)">
+    <rect x="0" y="${-xh}" width="${stem}" height="${xh}" rx="${stem / 2}" fill="${ink}"/>
+    <circle cx="${stem / 2}" cy="${cy}" r="${r}" fill="none" stroke="${ink}" stroke-width="${ring}"/>
+    <circle cx="${stem / 2}" cy="${cy}" r="${r * 0.36}" fill="${red}"/>
+  </g>`;
+}
+function wordmark(ink, red, size) {
+  const c = document.createElement("canvas").getContext("2d");
+  c.font = `800 ${size}px "Bricolage Grotesque"`;
+  const ls = -size * 0.012;
+  const x1 = c.measureText("cr").width + ls * 2, x2 = c.measureText("ble").width + ls * 3;
+  const gapL = size * 0.1, gapR = size * 0.07, stem = size * 0.112;
+  const W = x1 + gapL + stem + gapR + x2, base = size * 1.02, H = size * 1.22;
+  return { w: W, h: H, svg: `
+    <text x="0" y="${base}" font-family="Bricolage Grotesque" font-weight="800" font-size="${size}" fill="${ink}" letter-spacing="${ls}">cr</text>
+    <g transform="translate(${x1 + gapL} ${base})">${iLoupe(ink, red, size)}</g>
+    <text x="${x1 + gapL + stem + gapR}" y="${base}" font-family="Bricolage Grotesque" font-weight="800" font-size="${size}" fill="${ink}" letter-spacing="${ls}">ble</text>` };
+}
+const word = (ink, red, width) => { const w = wordmark(ink, red, 100); return `<svg viewBox="0 0 ${w.w} ${w.h}" width="${width}" height="${width * w.h / w.w}" aria-label="crible">${w.svg}</svg>`; };
+// l'icône : le i loupe seul, sur une pastille
+const icon = (s, ink = INK, red = RED, bg = "#ffffff", round = true) =>
+  `<svg viewBox="0 0 100 100" width="${s}" height="${s}" aria-hidden="true">${round ? `<rect width="100" height="100" rx="24" fill="${bg}"/>` : ""}<g transform="translate(50 90)">${iLoupe(ink, red, 96)}</g></svg>`;
+
+document.fonts.load('800 40px "Bricolage Grotesque"').then(() => document.fonts.ready).then(() => {
+  document.getElementById("m").innerHTML = `
+    <section class="tile"><span class="label">LOGO PRINCIPAL</span>${word(INK, RED, 560)}</section>
+    <section class="tile dark"><span class="label">SUR FOND SOMBRE</span>${word(LIGHT, RED_D, 400)}</section>
+    <section class="tile"><span class="label">ICÔNE · DE 128 À 16 PX</span>
+      <div class="sizes">
+        <figure>${icon(128, INK, RED, "#f4f1ea")}128</figure>
+        <figure>${icon(64, INK, RED, "#f4f1ea")}64</figure>
+        <figure>${icon(32, INK, RED, "#f4f1ea")}32</figure>
+        <figure>${icon(16, INK, RED, "#f4f1ea")}16</figure>
+        <figure>${icon(64, LIGHT, RED_D, "#16201d")}sombre</figure>
+      </div></section>
+    <section class="tile"><span class="label">DANS LE NAVIGATEUR</span>
+      <div class="browser">
+        <div class="tabs"><div class="tab">${icon(16, INK, RED, "#ffffff", false)} Crible — titanic.csv</div><div class="tab off">Nouvel onglet</div></div>
+        <div class="urlbar">crible.app</div>
+        <div class="app">${word(INK, RED, 120)}<nav><span>Jeu de données</span><span>Règles</span><span>Rapport</span><span>Aide</span></nav></div>
+        <div class="body"><div class="bar" style="width:72%"></div><div class="bar" style="width:54%"></div><div class="bar" style="width:63%"></div></div>
+      </div></section>
+    <section class="tile wide"><span class="label">EN-TÊTE DU RAPPORT EXPORTÉ</span>
+      <div class="report">${word(INK, RED, 130)}
+        <h3>titanic.csv</h3>
+        <p>891 lignes · 12 colonnes · ensemble de règles « Titanic · contrôle de base »</p>
+        <div class="kv"><span>Règles appliquées</span><span>14</span><span>En défaut</span><b>3</b><span>Lignes concernées</span><span>187 (21 %)</span></div>
+      </div></section>`;
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

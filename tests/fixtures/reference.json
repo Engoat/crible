@@ -1,0 +1,109 @@
+{
+  "titanic": {
+    "lignes": 891,
+    "colonnes": 12,
+    "manquants_Age": 177,
+    "manquants_Cabin": 687,
+    "manquants_Embarked": 2,
+    "plage_age_0_60": 22,
+    "unique_ticket_lignes": 344,
+    "unique_ticket_valeurs": 134,
+    "unique_passengerid": 0,
+    "doublons": 0,
+    "aberrantes_fare": {
+      "q1": 7.9104,
+      "q3": 31.0,
+      "bas": -26.724,
+      "haut": 65.6344,
+      "n": 116
+    },
+    "autorisees_sex_male": 314,
+    "format_cp_ticket": 760,
+    "entre_sibsp_ge_parch": 101,
+    "fare_sup_300": 3,
+    "skew_fare": 4.787316519674893,
+    "skew_age": 0.38910778230082677
+  },
+  "pieges": {
+    "type_prix": 5,
+    "type_date": 3,
+    "manquants_nom": 6,
+    "espaces_nom": 2,
+    "casse_ville_lignes": 102,
+    "format_email": 4,
+    "autorisees_statut": 3,
+    "plage_quantite_min0": 2,
+    "doublons": 2,
+    "unique_id_lignes": 4,
+    "lignes": 402,
+    "cp_avec_zero_initial": 35
+  },
+  "excel": {
+    "lignes": 60,
+    "montant_total": 9239.8,
+    "quantite_total": 259
+  },
+  "ml": {
+    "cramer_survived_Sex": 0.5426213749215026,
+    "cramer_survived_Pclass": 0.33668387622245516,
+    "cramer_survived_Embarked": 0.16605833339661635,
+    "eta_survived_Fare": 0.25730652238496243,
+    "eta_survived_Age": 0.07722109457217761,
+    "eta_survived_Pclass": 0.33848103596101525,
+    "eta_survived_fuite": 0.9999977803490145,
+    "pearson_sibsp_parch": 0.41483769862015646,
+    "pearson_pclass_fare": -0.5494996199439082,
+    "desequilibre_ratio": 0.6229508196721312,
+    "ks_Age_jeu_aleatoire": {
+      "d": 0.03398125172318711,
+      "p": 0.9981414269625336,
+      "n": 558,
+      "m": 156
+    },
+    "ks_Fare_jeu_aleatoire": {
+      "d": 0.02465931213497735,
+      "p": 0.9999540372126058,
+      "n": 690,
+      "m": 201
+    },
+    "ks_Pclass_jeu_aleatoire": {
+      "d": 0.024183430672723327,
+      "p": 0.9999704966757755,
+      "n": 690,
+      "m": 201
+    },
+    "chi_Embarked_jeu_aleatoire": {
+      "v": 0.011385558001477515,
+      "p": 0.9440077068520943,
+      "chi2": 0.11524189766345272
+    },
+    "ks_Age_jeu_biaise": {
+      "d": 0.10380350663520335,
+      "p": 0.051953610917423676,
+      "n": 261,
+      "m": 453
+    },
+    "ks_Fare_jeu_biaise": {
+      "d": 0.28495733477574536,
+      "p": 4.4165616942161884e-15,
+      "n": 314,
+      "m": 577
+    },
+    "ks_Pclass_jeu_biaise": {
+      "d": 0.14278775568777669,
+      "p": 0.0004487605242250259,
+      "n": 314,
+      "m": 577
+    },
+    "chi_Embarked_jeu_biaise": {
+      "v": 0.12256919037251322,
+      "p": 0.001258524523229016,
+      "chi2": 13.355630515001742
+    },
+    "chi_sex_jeu_aleatoire": {
+      "v": 0.01593521918727161,
+      "p": 0.6343164178357588,
+      "chi2": 0.2262527085968328
+    }
+  }
+}
